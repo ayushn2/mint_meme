@@ -11,14 +11,22 @@ describe("Factory", function () {
 
     async function deployFactoryFixture(){
         // Fetch accounts
-        const [deployer] = await ethers.getSigners()
+        const [deployer, creator] = await ethers.getSigners()
 
         // Fetch the contract : load the contract in JavaScript
          const Factory = await ethers.getContractFactory("Factory")
          // Deploy the contract 
          const factory = await Factory.deploy(FEE) // When contract is deployed constructor is called
         
-         return { factory, deployer}
+        //Create Token
+        const transaction = await factory.connect(creator).create("Nainwal Token", "NN", {value:FEE}) // We are passing metadata with this transaction i.e. value becoz when the creator will run the contract some gas fee will be required which will be FEE
+        await transaction.wait() 
+
+        // Get the token address
+        const tokenAddress = await factory.tokens(0)
+        const token = await ethers.getContractAt("Token", tokenAddress)
+
+         return { factory, token, deployer, creator}
     }
 
     describe("Deployment", function(){
@@ -32,4 +40,14 @@ describe("Factory", function () {
             expect(await factory.owner()).to.equal(deployer.address)
         })
 })
+
+    describe("Creating tokens",function(){
+        it("Should set the owner", async function(){
+            const {factory,token} = await deployFactoryFixture()
+
+            //The token should be owned by factory, the creator lists it
+            expect(await token.owner()).to.equal(await factory.getAddress())
+
+        })
+    })
 })

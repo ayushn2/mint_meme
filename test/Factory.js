@@ -19,7 +19,7 @@ describe("Factory", function () {
          const factory = await Factory.deploy(FEE) // When contract is deployed constructor is called
         
         //Create Token
-        const transaction = await factory.connect(creator).create("Nainwal Token", "NN", {value:FEE}) // We are passing metadata with this transaction i.e. value becoz when the creator will run the contract some gas fee will be required which will be FEE
+        const transaction = await factory.connect(creator).create("Nainwal Token", "NN", {value:FEE}) // We are passing metadata with this transaction i.e. value, becoz when the creator will run the contract some gas fee will be required which will be FEE
         await transaction.wait() 
 
         // Get the token address
@@ -47,7 +47,40 @@ describe("Factory", function () {
 
             //The token should be owned by factory, the creator lists it
             expect(await token.owner()).to.equal(await factory.getAddress())
+        })
+
+        it("Should set the creator", async function(){
+            const {token, creator} = await deployFactoryFixture()
+            expect(await token.creator()).to.equal(creator.address)
+        })
+
+        it("Should set the supply", async function(){
+            const {factory, token} = await loadFixture(deployFactoryFixture)
+
+            const totalSupply = ethers.parseUnits("1000000", 18)
+
+            expect(await token.balanceOf(await factory.getAddress())).to.equal(totalSupply)
 
         })
+
+        it("Should update the ETH balance", async function(){
+            const { factory, deployer, creator} = await loadFixture(deployFactoryFixture)
+
+            const balance = await ethers.provider.getBalance(await factory.getAddress())
+            
+            // Ensuring that the balance of the factory address is equal to the FEE
+            expect(balance).to.equal(FEE)
+        })
+
+        it("should create the sale", async function(){
+            const { factory, deployer, creator, token} = await loadFixture(deployFactoryFixture)
+
+            const count = await factory.totalTokens()
+            expect(count).equal(1) 
+
+            const sale = await factory.getTokenSale(0)
+            expect(sale.token).equal(await token.getAddress())
+        })
+
     })
 })

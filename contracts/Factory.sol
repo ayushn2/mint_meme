@@ -110,4 +110,28 @@ contract Factory {
         // Emit an event
         emit Buy(_token, _amount);
     }
+
+    function deposit(address _token) external{
+        // The remaining token balance and the ETH raised would go into a liquidity pool like uniswap V3
+        // For simplicity we'll just transfer remaining tokens and ETH raised to the creator
+
+        Token token = Token(_token);
+        TokenSale memory sale = tokenToSale[_token];
+
+        require(sale.isOpen == false, "Factory: Sale is still open");
+
+        // transfer remaining tokens to creator
+        token.transfer(sale.creator, token.balanceOf(address(this)));
+
+        // transfer eth raised
+        (bool success,) = payable(sale.creator).call{value: sale.raised}("");//We can simply use transfer function but for safety purposes we are using call
+        require(success,"Factory: failed to send eth");
+    }
+
+    function withdraw(uint256 _amount) external{
+        require(msg.sender == owner, "Factory: only owner can call withdraw function");
+
+        (bool success,) = payable(owner).call{value: _amount}("");
+        require(success, "Factory: ETH transfer failed");
+    }
  }

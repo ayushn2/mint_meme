@@ -14,9 +14,9 @@ const Header = ({account, setAccount}) => {
     <div className='flex flex-row justify-between w-full'>
      <h1 className='text-4xl'>Mint MeMe</h1>
      { account ? (
-      <button >{account.slice(0,6) + '...' + account.slice(-4)}</button>
+      <button className='glass-button'>{account.slice(0,6) + '...' + account.slice(-4)}</button>
     ) : (
-    <button onClick={connectHandler} className='flex flex-row gap-2 justify-center items-center cursor-pointer'>Connect <Wallet className='text-white text-sm' /></button>
+    <button onClick={connectHandler} className='glass-button flex flex-row gap-2 justify-center items-center cursor-pointer'>Connect <Wallet className='text-white text-sm' /></button>
   )}
      
     </div>

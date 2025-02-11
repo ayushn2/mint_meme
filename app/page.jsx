@@ -8,12 +8,14 @@ import { useState } from 'react'
 import { ethers } from 'ethers';
 import config from "./config.json"
 import Factory from './abis/Factory.json';
+import CreateToken from './components/CreateToken';
 
 const page = () => {
-  const [account, setAccount] = useState("")
+  const [account, setAccount] = useState(null)
   const [provider, setProvider] = useState(null)
   const [factory, setFactory] = useState(null)
   const [fee, setFee] = useState(null)
+  const [showCreate, setShowCreate] = useState(false)
 
   async function loadBlockchainData(){
     const provider = new ethers.BrowserProvider(window.ethereum)
@@ -24,11 +26,9 @@ const page = () => {
     const factory = new ethers.Contract(config[network.chainId].factory.address, Factory, provider)// (address, abis, provider)
     setFactory(factory)
 
-    // console.log("Network Chain ID:", network.chainId);
-    // console.log("Factory Config:", config[network.chainId]);
-
     const fee = await factory.fee()
-    console.log("fee",fee)
+    console.log(fee)
+    setFee(fee)
   }
 
   useEffect(()=>{
@@ -38,7 +38,7 @@ const page = () => {
   return ( 
     <div className='bg-primary my-10 mx-20 w-full'>
       <Header account={account} setAccount={setAccount}/>
-      <List/>
+      <CreateToken showCreate={showCreate} setShowCreate={setShowCreate} fee={fee} provider={provider} factory={factory} account={account}/>
     </div>
   )
 }

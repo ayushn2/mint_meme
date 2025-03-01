@@ -63,6 +63,13 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      margin: 0;
+      padding: 0;
+      background-image: url('./public/253.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
     }
 
     .glass-button {
@@ -124,3 +131,13 @@
       padding: 1.50em;
       border-radius: 6px;
     }
+
+    .tokens {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 0));
+      gap: 1em;
+      place-content: center;
+      text-align: center;
+    }
+
+    

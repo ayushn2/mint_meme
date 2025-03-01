@@ -11,7 +11,7 @@ const Header = ({account, setAccount}) => {
   }
 
   return (
-    <div className='flex flex-row justify-between w-full'>
+    <div className='flex flex-row justify-between items-center w-full'>
      <h1 className='text-4xl'>Mint MeMe</h1>
      { account ? (
       <button className='glass-button'>{account.slice(0,6) + '...' + account.slice(-4)}</button>

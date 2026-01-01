@@ -94,7 +94,7 @@ Read the Solidity files for full details and comments.
 
 ---
 
-## Frontend (Next.js) 
+## Frontend (Next.js)
 
 - The frontend is built with Next.js using the `app/` directory.
 - It reads deployed contract addresses from `app/config.json`. Update this file after deploying to a new network or address.
@@ -132,7 +132,7 @@ Tests cover:
 
 ---
 
-## Contributing 
+## Contributing
 
 Contributions welcome — open an issue or a pull request. Please include tests for any change to smart-contract logic.
 

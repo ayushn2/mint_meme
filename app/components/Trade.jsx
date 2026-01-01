@@ -1,9 +1,12 @@
 import React from 'react'
 
-const Trade = () => {
+const Trade = ({ toggleTrade, token, provider, factory}) => {
   return (
-    <div>
-      
+    <div className='list'>
+      <h2>trade</h2>
+      <div className='token__details'>
+        <p>{token.name}</p>
+      </div>
     </div>
   )
 }

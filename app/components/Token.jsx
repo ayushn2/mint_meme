@@ -4,7 +4,7 @@ import { ethers } from 'ethers';
 
 const Token = ({toggleTrade, token}) => {
   return (
-    <div className='flex flex-col justify-center items-center'>
+    <div  className='flex flex-col justify-center items-center'>
       <CldImage
           width={200}
           height={200}

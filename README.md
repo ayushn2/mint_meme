@@ -1,4 +1,4 @@
-# mint_meme — Meme Token Factory (Hardhat + Next.js) ✅
+# mint_meme — Meme Token Factory (Hardhat + Next.js)
 
 A minimal full-stack sample demonstrating a token factory on Ethereum (Hardhat) with a Next.js frontend for listing, creating and buying tokens.
 
@@ -108,7 +108,7 @@ To interact locally, connect MetaMask to your local Hardhat node (chainId 31337)
 
 ---
 
-## Testing & CI 
+## Testing & CI
 
 Run the test suite:
 
@@ -124,7 +124,7 @@ Tests cover:
 
 ---
 
-## Notes & Security 
+## Notes & Security
 
 - This is an educational sample, not production-ready. Do not use as-is for real value transfers.
 - Gas, re-entrancy, and economic edge-cases are simplified for clarity.
@@ -132,7 +132,7 @@ Tests cover:
 
 ---
 
-## Contributing 🤝
+## Contributing 
 
 Contributions welcome — open an issue or a pull request. Please include tests for any change to smart-contract logic.
 
@@ -144,4 +144,4 @@ This project is licensed under the ISC License (see `package.json`).
 
 ---
 
-If you'd like, I can also add an example `deploy` script, CI configuration (GitHub Actions), or expand the frontend docs for common flows. 
+If you'd like, I can also add an example `deploy` script, CI configuration (GitHub Actions), or expand the frontend docs for common flows.
